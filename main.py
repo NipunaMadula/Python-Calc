@@ -11,17 +11,21 @@ def evaluate_expression():
     except Exception:
         entry.delete(0, tk.END)  # Clear the entry on error
         entry.insert(tk.END, "Error")  # Show error
+        entry.config(state="disabled")  # Disable the entry after error
 
 # Function to handle button clicks
 def button_click(value):
+    if entry["state"] == "disabled":  # Prevent further input after error
+        return
     winsound.Beep(500, 100)  # Play a sound when any other button is clicked
     current = entry.get()  # Get current input
     entry.delete(0, tk.END)  # Clear the entry
     entry.insert(tk.END, current + str(value))  # Append clicked button value
 
-# Function to clear the entry
+# Function to clear the entry and re-enable input
 def clear_entry():
     winsound.Beep(500, 100)  # Play a sound when 'C' is clicked
+    entry.config(state="normal")  # Re-enable the entry after clearing
     entry.delete(0, tk.END)  # Clear the entry
 
 # Create the main window
