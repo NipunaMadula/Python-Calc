@@ -1,5 +1,15 @@
 import tkinter as tk
 
+# Function to evaluate the expression
+def evaluate_expression():
+    try:
+        result = eval(entry.get())  # Evaluate the expression
+        entry.delete(0, tk.END)     # Clear the entry
+        entry.insert(tk.END, str(result))  # Insert the result
+    except Exception:
+        entry.delete(0, tk.END)  # Clear the entry on error
+        entry.insert(tk.END, "Error")  # Show error
+
 # Function to handle button clicks
 def button_click(value):
     current = entry.get()  # Get current input
@@ -29,6 +39,18 @@ buttons = [
 # Add buttons to the grid
 for (text, row, column) in buttons:
     button = tk.Button(root, text=text, padx=20, pady=20, command=lambda value=text: button_click(value))
+    button.grid(row=row, column=column)
+
+# Create operator and equal buttons
+operator_buttons = [
+    ('/', 1, 3), ('*', 2, 3), ('-', 3, 3), ('+', 4, 3), ('=', 4, 2)
+]
+
+for (text, row, column) in operator_buttons:
+    if text == "=":
+        button = tk.Button(root, text=text, padx=20, pady=20, command=evaluate_expression)
+    else:
+        button = tk.Button(root, text=text, padx=20, pady=20, command=lambda value=text: button_click(value))
     button.grid(row=row, column=column)
 
  # Add 'C' button
