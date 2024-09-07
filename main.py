@@ -1,4 +1,5 @@
 import tkinter as tk
+import winsound  # Import the winsound module for sound effects
 
 # Function to evaluate the expression
 def evaluate_expression():
@@ -12,12 +13,14 @@ def evaluate_expression():
 
 # Function to handle button clicks
 def button_click(value):
+    winsound.Beep(500, 100)  # Play a sound when a button is clicked
     current = entry.get()  # Get current input
     entry.delete(0, tk.END)  # Clear the entry
     entry.insert(tk.END, current + str(value))  # Append clicked button value
 
 # Function to clear the entry
 def clear_entry():
+    winsound.Beep(500, 100)  # Play a sound when 'C' is clicked
     entry.delete(0, tk.END)  # Clear the entry
 
 # Create the main window
@@ -53,7 +56,7 @@ for (text, row, column) in operator_buttons:
         button = tk.Button(root, text=text, padx=20, pady=20, command=lambda value=text: button_click(value))
     button.grid(row=row, column=column)
 
- # Add 'C' button
+# Add 'C' button
 clear_button = tk.Button(root, text="C", padx=20, pady=20, command=clear_entry)
 clear_button.grid(row=4, column=1)
 
