@@ -1,8 +1,9 @@
 import tkinter as tk
 import winsound  # Import the winsound module for sound effects
 
-# Function to evaluate the expression
+# Function to evaluate the expression and play a different sound for "="
 def evaluate_expression():
+    winsound.Beep(800, 200)  # Play a different sound for "=" button
     try:
         result = eval(entry.get())  # Evaluate the expression
         entry.delete(0, tk.END)     # Clear the entry
@@ -13,7 +14,7 @@ def evaluate_expression():
 
 # Function to handle button clicks
 def button_click(value):
-    winsound.Beep(500, 100)  # Play a sound when a button is clicked
+    winsound.Beep(500, 100)  # Play a sound when any other button is clicked
     current = entry.get()  # Get current input
     entry.delete(0, tk.END)  # Clear the entry
     entry.insert(tk.END, current + str(value))  # Append clicked button value
