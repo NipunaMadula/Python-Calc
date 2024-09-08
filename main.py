@@ -28,6 +28,12 @@ def clear_entry():
     entry.config(state="normal")  # Re-enable the entry after clearing
     entry.delete(0, tk.END)  # Clear the entry
 
+# Function to implement backspace
+def backspace():
+    current = entry.get()  # Get current input
+    entry.delete(0, tk.END)  # Clear the entry
+    entry.insert(tk.END, current[:-1])  # Remove the last character
+
 # Create the main window
 root = tk.Tk()
 root.title("Attractive Simple Calculator")
@@ -72,5 +78,9 @@ for (text, row, column) in operator_buttons:
 # Add 'C' button with a different color
 clear_button = tk.Button(root, text="C", **operator_style, command=clear_entry)
 clear_button.grid(row=4, column=1, padx=5, pady=5)
+
+# Add backspace button
+backspace_button = tk.Button(root, text="←", **operator_style, command=backspace)
+backspace_button.grid(row=4, column=0, padx=5, pady=5)
 
 root.mainloop()
